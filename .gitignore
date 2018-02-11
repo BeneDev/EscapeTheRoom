@@ -6,3 +6,6 @@
 *_BuiltData.uasset
 /Content/StarterContent/
 *.VC.db
+*.db-shm
+*.db-wal
+*.ipch
