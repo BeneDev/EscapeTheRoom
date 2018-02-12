@@ -22,6 +22,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	void OpenDoor();
+	void CloseDoor();
 
 public:	
 	// Called every frame
@@ -34,4 +35,5 @@ private:
 	ATriggerVolume* PressurePlate;
 	AActor* TriggeringActor;
 	
+	AActor* Owner;
 };
