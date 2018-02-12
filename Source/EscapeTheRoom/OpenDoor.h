@@ -29,11 +29,12 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	float OpenAngle = 90.f;
+	UPROPERTY(EditAnywhere)
+	float OpenAngle = -75.f;
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 	AActor* TriggeringActor;
-	
 	AActor* Owner;
+
+	bool bIsOpen = false;
 };

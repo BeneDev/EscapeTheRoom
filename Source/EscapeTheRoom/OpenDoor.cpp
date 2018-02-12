@@ -27,18 +27,14 @@ void UOpenDoor::BeginPlay()
 
 void UOpenDoor::OpenDoor()
 {
-	// Create a rotator
-	FRotator TargetRotation = FRotator(0.f, -75.f, 0.f);
-	// Set the door rotation
-	Owner->SetActorRotation(TargetRotation);
+	Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
+	bIsOpen = true;
 }
 
 void UOpenDoor::CloseDoor()
 {
-	// Create a rotator
-	FRotator TargetRotation = FRotator(0.f, 0.f, 0.f);
-	// Set the door rotation
-	Owner->SetActorRotation(TargetRotation);
+	Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+	bIsOpen = false;
 }
 
 
@@ -52,7 +48,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	{
 		OpenDoor();
 	}
-	else
+	else if(bIsOpen)
 	{
 		CloseDoor();
 	}
