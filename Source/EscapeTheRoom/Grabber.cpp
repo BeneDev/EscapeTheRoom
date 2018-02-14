@@ -32,7 +32,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// Get the player view point
+	/// Get the player view point
 	APlayerController* Player = GetWorld()->GetFirstPlayerController();
 	FVector PlayerViewpointLocation;
 	FRotator PlayerViewpointRotation;
@@ -40,8 +40,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		OUT PlayerViewpointLocation,
 		OUT PlayerViewpointRotation
 	);
-	//UE_LOG(LogTemp, Warning, TEXT("%s looking in %s"), *PlayerViewpointLocation.ToString(), *PlayerViewpointRotation.ToString());
-	// Draw red vector in the world to visualize
+	/// Draw red vector in the world to visualize
 	FVector LineTraceEnd = PlayerViewpointLocation + PlayerViewpointRotation.Vector()*Reach;
 	DrawDebugLine(
 		GetWorld(),
@@ -53,7 +52,22 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		0.0f,
 		10.0f
 	);
-	// Raycasting out to reach distance
-	// See what we hit
+	/// Setup query parameters
+	FCollisionQueryParams TraceParams(FName(TEXT("")), false, GetOwner());
+	/// Raycasting out to reach distance
+	FHitResult Hit;
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		PlayerViewpointLocation,
+		LineTraceEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		TraceParams
+	);
+	/// See what we hit
+	AActor* ActorHit = Hit.GetActor();
+	if (ActorHit)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s is in Front of me!"), *ActorHit->GetName());
+	}
 }
 
