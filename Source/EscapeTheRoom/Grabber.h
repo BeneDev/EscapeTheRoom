@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -28,5 +29,7 @@ private:
 	// How far the player can reach from his central point
 	UPROPERTY(EditAnywhere)
 	float Reach = 50.0f;
+
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	
 };
