@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
+#include "Containers/Array.h"
+#include "Components/PrimitiveComponent.h"
 #include "OpenDoor.generated.h"
 
 
@@ -21,9 +23,6 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void OpenDoor();
-	void CloseDoor();
-
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -31,10 +30,20 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	float OpenAngle = -75.f;
+
+	UPROPERTY(EditAnywhere)
+	float TriggerMass = 20.f;
+
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
-	AActor* TriggeringActor;
+
 	AActor* Owner;
 
 	bool bIsOpen = false;
+
+	void OpenDoor();
+
+	void CloseDoor();
+
+	float GetTotalMassOfActorsOnPlate();
 };
