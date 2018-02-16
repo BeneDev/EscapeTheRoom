@@ -35,9 +35,9 @@ private:
 	float TriggerMass = 20.f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
+	ATriggerVolume* PressurePlate = nullptr;
 
-	AActor* Owner;
+	AActor* Owner = nullptr;
 
 	bool bIsOpen = false;
 
