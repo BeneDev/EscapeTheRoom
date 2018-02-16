@@ -36,13 +36,19 @@ private:
 	
 	// Find attached physics handle component
 	void FindPhysicsHandle();
+
 	// Setup attached input component
 	void SetupInputComponent();
 
+	// Get the owners reach trace end (false) or start (true)
+	FVector GetLineTracePoint(bool);
+
 	// Raycast and grab whats in reach
 	void Grab();
+
 	// Release the object which has been grabbed
 	void GrabRelease();
+
 	// return the first physics body actor in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
 };
