@@ -31,14 +31,16 @@ void UOpenDoor::BeginPlay()
 // Open the door the file is on
 void UOpenDoor::OpenDoor()
 {
-	Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
+	// Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
+	OnOpenRequest.Broadcast();
 	bIsOpen = true;
 }
 
 // Close the door the file is on
 void UOpenDoor::CloseDoor()
 {
-	Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+	// Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
+	OnCloseRequest.Broadcast();
 	bIsOpen = false;
 }
 
