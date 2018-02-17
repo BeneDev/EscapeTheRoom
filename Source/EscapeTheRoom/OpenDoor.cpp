@@ -49,6 +49,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	// Poll the Trigger Volume
+	// TODO make this not poll every tick, but based on an event
 	if (GetTotalMassOfActorsOnPlate() >= TriggerMass)
 	{
 		OnOpenRequest.Broadcast();
