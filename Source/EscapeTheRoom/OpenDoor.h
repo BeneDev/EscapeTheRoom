@@ -38,21 +38,12 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float OpenAngle = -75.f;
-
-	UPROPERTY(EditAnywhere)
-	float TriggerMass = 20.f;
+	float TriggerMass = 30.f;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
 
 	AActor* Owner = nullptr;
-
-	bool bIsOpen = false;
-
-	void OpenDoor();
-
-	void CloseDoor();
 
 	float GetTotalMassOfActorsOnPlate();
 };

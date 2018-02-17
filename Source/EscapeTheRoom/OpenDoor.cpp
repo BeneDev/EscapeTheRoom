@@ -28,22 +28,6 @@ void UOpenDoor::BeginPlay()
 	}
 }
 
-// Open the door the file is on
-void UOpenDoor::OpenDoor()
-{
-	// Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
-	OnOpenRequest.Broadcast();
-	bIsOpen = true;
-}
-
-// Close the door the file is on
-void UOpenDoor::CloseDoor()
-{
-	// Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
-	OnCloseRequest.Broadcast();
-	bIsOpen = false;
-}
-
 // Get the mass of the actors on the trigger plate for the door, the file is on
 float UOpenDoor::GetTotalMassOfActorsOnPlate()
 {
@@ -67,11 +51,11 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	// Poll the Trigger Volume
 	if (GetTotalMassOfActorsOnPlate() >= TriggerMass)
 	{
-		OpenDoor();
+		OnOpenRequest.Broadcast();
 	}
-	else if(bIsOpen)
+	else
 	{
-		CloseDoor();
+		OnCloseRequest.Broadcast();
 	}
 }
 
