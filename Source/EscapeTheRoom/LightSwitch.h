@@ -36,8 +36,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
 
+	UPROPERTY(BlueprintAssignable)
 	FLightEvent OnTurnOn;
 
+	UPROPERTY(BlueprintAssignable)
 	FLightEvent OnTurnOff;
 	
 };
