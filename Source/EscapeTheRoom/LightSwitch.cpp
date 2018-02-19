@@ -36,7 +36,6 @@ void ULightSwitch::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	if (PressurePlate->IsOverlappingActor(GetWorld()->GetFirstPlayerController()->GetPawn()))
 	{
 		OnTurnOn.Broadcast();
-		UE_LOG(LogTemp, Warning, TEXT("Go on lights!"))
 	}
 	else
 	{
