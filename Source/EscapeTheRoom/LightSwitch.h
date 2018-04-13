@@ -4,21 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "GameFramework/Actor.h"
+#include "Components/LightComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Engine/TriggerVolume.h"
-#include "Containers/Array.h"
-#include "Components/PrimitiveComponent.h"
-#include "OpenDoor.generated.h"
+#include "Engine/World.h"
+#include "LightSwitch.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLightEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class ESCAPETHEROOM_API UOpenDoor : public UActorComponent
+class ESCAPETHEROOM_API ULightSwitch : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UOpenDoor();
+	ULightSwitch();
 
 protected:
 	// Called when the game starts
@@ -28,21 +30,16 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(BlueprintAssignable)
-	FDoorEvent OnOpenRequest;
-
-	UPROPERTY(BlueprintAssignable)
-	FDoorEvent OnCloseRequest;
-
 private:
-	UPROPERTY(EditAnywhere)
-	float TriggerMass = 30.f;
+	AActor* Owner;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
 
-	AActor* Owner = nullptr;
+	UPROPERTY(BlueprintAssignable)
+	FLightEvent OnTurnOn;
 
-	float GetTotalMassOfActorsOnPlate();
+	UPROPERTY(BlueprintAssignable)
+	FLightEvent OnTurnOff;
 	
 };
